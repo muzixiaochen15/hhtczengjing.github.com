@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>合理使用Python助力iOS开发</title>
+  <meta name="description" content="说明：本文并不是介绍关于Python如何使用或者是Python的语法知识的，重点是分享在开发中使用Python来减少重复性的劳动的思路。">
+  <meta name="author" content="zengjing">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="合理使用Python助力iOS开发">
+  <meta name="twitter:description" content="说明：本文并不是介绍关于Python如何使用或者是Python的语法知识的，重点是分享在开发中使用Python来减少重复性的劳动的思路。">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="合理使用Python助力iOS开发">
+  <meta property="og:description" content="说明：本文并不是介绍关于Python如何使用或者是Python的语法知识的，重点是分享在开发中使用Python来减少重复性的劳动的思路。">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://blog.devzeng.com/blog/using-python-in-ios.html">
+  <link rel="alternate" type="application/rss+xml" title="曾静的技术博客" href="http://blog.devzeng.com/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+  <script>
+  	var _hmt = _hmt || [];
+	(function() {
+  		var hm = document.createElement("script");
+  		hm.src = "//hm.baidu.com/hm.js?9bd8b5838b97bdb84f93cef73b8878a9";
+  		var s = document.getElementsByTagName("script")[0]; 
+  		s.parentNode.insertBefore(hm, s);
+	})();
+  </script>
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 曾静的技术博客 的主页" class="blog-button"><img src="/assets/images/avatar.jpg" width="80" alt="曾静的技术博客 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 曾静的技术博客" class="blog-button">曾静的技术博客</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">但行好事，莫问前程.</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">嗨，我是曾静 (@devzeng)，iOS开发新人，目前暂居深圳。</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description">这是我用来记录平日学习笔记的地方，欢迎您的访问.</p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+                
+                  <li class="navigation__item"><a href="#" target="_blank" title="了解更多关于我">关于</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/devzeng" title="@devzeng 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/hhtczengjing" title="@hhtczengjing 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+  <!-- Twitter -->
+  <li class="navigation__item">
+    <a href="http://twitter.com/hhtczengjing" title="@hhtczengjing" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml/" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:hhtczengjing@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-slate"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2015-06-07 03:37:56 +0800" itemprop="datePublished" class="post-meta__date date">2015-06-07</time> &#8226; <span class="post-meta__tags tags">Python</span>
+    </div>
+    <h1 class="post-title">合理使用Python助力iOS开发</h1>
+  </header>
+
+  <section class="post">
+    <p>说明：本文并不是介绍关于Python如何使用或者是Python的语法知识的，重点是分享在开发中使用Python来减少重复性的劳动的思路。</p>
+
+<p><img src="/images/python_ios/python_logo.png" alt="python_logo.png"></p>
+
+<p><a href="https://www.python.org">Python</a>是一种面向对象、解释型计算机程序设计语言，由<code>Guido van Rossum</code>于1989年底发明，第一个公开发行版发行于1991年，Python 源代码同样遵循 GPL(GNU General Public License)协议 。Python语法简洁而清晰，具有丰富和强大的类库。它常被昵称为胶水语言，能够把用其他语言制作的各种模块（尤其是C/C++）很轻松地联结在一起。</p>
+
+<p>Python就为我们提供了非常完善的基础代码库，覆盖了网络、文件、GUI、数据库、文本等大量内容，被形象地称作“内置电池（batteries included）”。用Python开发，许多功能不必从零编写，直接使用现成的即可。</p>
+
+<p>除了内置的库外，Python还有大量的第三方库，也就是别人开发的，供你直接使用的东西。当然，如果你开发的代码通过很好的封装，也可以作为第三方库给别人使用。</p>
+
+<p>许多大型网站就是用Python开发的，例如YouTube、Instagram，还有国内的豆瓣。很多大公司，包括Google、Yahoo等，甚至NASA（美国航空航天局）都大量地使用Python。</p>
+
+<h3>安装Python第三方模块</h3>
+
+<p>在Python中，安装第三方模块，是通过包管理工具pip完成的，在终端中尝试运行pip如果提示未找到该命令，需要先安装pip。</p>
+
+<p>(1)下载pip的安装脚本</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">wget https://bootstrap.pypa.io/get-pip.py
+</code></pre></figure>
+<p>(2)执行安装脚本，安装pip</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">sudo python get-pip.py 
+</code></pre></figure>
+<p>一般来说，第三方库都会在Python官方的<code>pypi.python.org</code>网站注册，要安装一个第三方库，必须先知道该库的名称，可以在官网或者pypi上搜索。比如使用比较频繁的一个用于解析HTML的库BeautifulSoup，因此安装BeautifulSoup的命令为：</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">pip install BeautifulSoup
+</code></pre></figure>
+<p>只要耐心等待下载并安装后，就可以使用了。另外其他常用的第三方库还有MySQL的驱动：mysql-connector-python，用于科学计算的NumPy库：numpy，用于生成文本的模板工具Jinja2，等等。</p>
+
+<h3>案例</h3>
+
+<p>1、抓取<code>http://blog.devzeng.com</code>网站下面的所有文章的名称和链接。适用于模拟爬虫的功能，将某些网站上面的数据抓取回来。</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#!/usr/bin/python
+#-*- coding: utf-8 -*-
+#encoding=utf-8
+
+import urllib,re,json,time,sys
+from BeautifulSoup import BeautifulSoup
+
+#获取指定的URL的内容
+def getHtmlContent(url):
+    page = urllib.urlopen(url)
+    html = page.read()
+    return html
+
+#获取全部的文章的链接
+def getAllHtmlLink(html, url):
+    arr = []
+    pattern = u&#39;&lt;a.*?href=&quot;(.+)&quot;.*?&gt;(.*?)&lt;/a&gt;&#39;
+    soup = BeautifulSoup(html)
+    articleResult = soup.findAll(&#39;article&#39;)
+    for article in articleResult:
+        h1Result = article.findAll(&#39;h1&#39;)
+        for h1 in h1Result:
+            aResult = h1.findAll(&#39;a&#39;)
+            for a in aResult:
+                ret = re.search(pattern, str(a))
+                if ret:
+                    map = {}
+                    group = ret.groups()
+                    map[&#39;title&#39;] = group[1]
+                    map[&#39;link&#39;] = url + group[0]
+                    arr.append(map)
+    return arr
+
+#转换成JSON字符串
+def toJSONString(arr):
+    return json.dumps(arr)
+
+#保存内容到文件
+def saveToFile(path, json):
+    fp = open(path, &#39;w&#39;)
+    fp.write(json)
+    fp.close()
+
+if __name__==&quot;__main__&quot;:
+    start = time.time()
+    url = &quot;http://blog.devzeng.com&quot;
+    html = getHtmlContent(url + &quot;/blog/archives&quot;)
+    result = getAllHtmlLink(html, url)
+    json = toJSONString(result)
+    print type(json.encode(&#39;utf-8&#39;).decode(&#39;utf-8&#39;))
+    saveToFile(&quot;blog.txt&quot;, json)
+    c = time.time() - start
+    print(&#39;执行完成，程序运行耗时:%0.2fs&#39;%(c))
+</code></pre></figure>
+<p>说明：</p>
+
+<p>(1)依赖BeautifulSoup模块，使用前需要先安装<code>BeautifulSoup</code></p>
+
+<p>(2)思路是先读取网址的HTML内容，然后解析HTML中的指定的链接标签分析里面的数据然后整合到一起</p>
+
+<p>(3)def开头的是函数，函数名后面有冒号，没有花括号的区分用代码缩进来判断是不是一个代码块的内容。</p>
+
+<p>2、前段时间的项目是使用WebService作为网络API接口，为了保证请求参数的完整和顺序的一致需要将WSDL文件下载下来进行解析。但是每次手动的处理都是一件很费体力的事情，而且经常容易遗漏一些东西。使用Python之后就极大的方便了我们的开发。</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#!/usr/bin/python
+#-*- coding: utf-8 -*-
+#encoding=utf-8
+
+import urllib,re
+from BeautifulSoup import BeautifulSoup
+
+#获取指定的URL的内容
+def getHtmlContent(url):
+    page = urllib.urlopen(url)
+    html = page.read()
+    return html
+
+#获取全部的超链接的内容
+def getAllHrefLink(url, html):
+        soup = BeautifulSoup(html)
+        aResult = soup.findAll(&#39;a&#39;)
+        pattern = u&#39;&lt;a.*?href=&quot;(.+)&quot;.*?&gt;(.*?)&lt;/a&gt;&#39;
+        for a in aResult:
+            ret = re.search(pattern, str(a))
+            if ret:
+                group = ret.groups()
+                name = group[1].replace(&#39;.asmx&#39;, &#39;.xml&#39;)
+                link = url+group[0]
+                if name != u&#39;[To Parent Directory]&#39;:
+                    saveData(name, link)
+
+#保存文本内容到指定的路径                
+def saveData(path, content):
+    f = open(path,&#39;w+&#39;)
+    f.write(content)
+
+#调用函数
+url = &quot;http://192.168.1.101:8080&quot;
+content = getHtmlContent(url + &quot;/Services/&quot;)
+getAllHrefLink(url, content)
+</code></pre></figure>
+<h3>参考资料</h3>
+
+<p>1、<a href="https://www.python.org">《Python官网》</a></p>
+
+<p>2、<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000">《Python 3.0教程》</a></p>
+
+<p>3、<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000">《Python 2.7教程》</a></p>
+
+<p>4、<a href="http://www.cnblogs.com/SunWentao/archive/2008/06/19/1225690.html">《python字符串操作》</a></p>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/blog/apple-watch-development-at-glance.html" title="link to 初识Apple Watch应用开发">初识Apple Watch应用开发</a></h2>
+       <p class="excerpt">自发布iOS8.2 SDK和Xcode6.2来，大家对于WatchKit的关注就不绝于耳。特别随着Apple Watch的发售一大批的Apple Watch的应用就如雨后春笋一般涌入AppStore。本文对《WatchKit Programming Guide》中提到的相关概念结合目前的各方资料进行整理，重点介绍在Apple Watch开发中的一些基本概念和数据通信方面的内容。配置Xcode添加Watch应用1、使用最新的Xcode(Xcode 6.2及以上)打开现有的iOS项目2、选择F...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2015-07-08 22:35:09 +0800" class="post-list__meta--date date">2015-07-08</time> &#8226; <span class="post-list__meta--tags tags">iOS</span><a class="btn-border-small" href=/blog/apple-watch-development-at-glance.html>继续阅读</a></div>
+   </div>
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/blog/ios-reveal-integrating.html" title="link to iOS开发中集成Reveal">iOS开发中集成Reveal</a></h2>
+       <p class="excerpt">Reveal 是一个界面调试工具。使用Reveal，我们可以在iOS开发时动态地查看和修改应用程序的界面。它类似Chrome的“审查元素”功能，我们不但可以在运行时看到iOS程序的界面层级关系，还可以实时地修改程序界面，不用重新运行程序就可以看到修改之后的效果。在使用时，我们将Reveal连接上模拟器或真机上正在运行的iOS程序，然后就可以查看和调试iOS程序的界面。下载安装Releal官方提供试用版本，免费试用期是30天，功能和正式版没有差别.点此下载。配置Reveal1、配置方式一(1...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2015-05-31 00:50:23 +0800" class="post-list__meta--date date">2015-05-31</time> &#8226; <span class="post-list__meta--tags tags">iOS</span><a class="btn-border-small" href=/blog/ios-reveal-integrating.html>继续阅读</a></div>
+   </div>
+   
+</section>
+
+<section class="post-comments">
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2016-07-10 生成，感谢<a href="https://gitcafe.com/signup?invited_by=zengjing">GitCafe</a>和<a href="https://github.com">GitHub</a>为本站提供存储空间.</span>
+        <span class="footer__copyright">本站由 <a href="http://www.devzeng.com">@devzeng</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/hhtczengjing/hhtczengjing.github.com">本站源码</a> - &copy; 2016</span>
+    </footer>
+</section>
+
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+    
+  </body>
+
+</html>
